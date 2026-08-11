@@ -130,21 +130,23 @@ curl -X POST http://127.0.0.1:8000/api/shorten \
 
 ---
 
-## Deploying (free options)
+## Deployment
 
-- **Render.com** — connect your GitHub repo, set the start command to
-  `uvicorn app.main:app --host 0.0.0.0 --port $PORT`, and it deploys
-  automatically on every push.
-- **Railway.app** — similar one-click deploy from GitHub.
+The application can be deployed as a Python web service on platforms such as Render.
 
-Once deployed, update the README with your live URL — a working link
-on your resume matters more than the GitHub repo alone.
+### Render
+
+1. Connect the GitHub repository to Render.
+2. Create a new Web Service.
+3. Set the build command:
+
+```bash
+pip install -r requirements.txt
 
 ---
 
 ## Possible Future Improvements
 
-(Good answers if an interviewer asks "what would you add next?")
 - Custom short codes (let users pick their own alias)
 - Rate limiting to prevent abuse
 - Link expiration dates
