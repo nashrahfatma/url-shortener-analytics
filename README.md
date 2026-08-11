@@ -1,4 +1,4 @@
-RL Shortener with Analytics Dashboard
+URL Shortener with Analytics Dashboard
 A backend service that shortens long URLs and tracks click analytics for each link — built with FastAPI, SQLAlchemy, and SQLite.
 
 Live demo of what it does:
