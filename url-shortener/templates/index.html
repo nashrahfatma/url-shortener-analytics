@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkForge | Shorten & Track</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #CCCDC7;
+            color: #1F2937;
+            padding: 40px 20px;
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1E3A8A;
+            margin: 0 0 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            color: #374151;
+            font-size: 1.05rem;
+            font-style: italic;
+            margin: 0 0 4px;
+        }
+
+        .sub-heading {
+            display: inline-block;
+            background: #1E3A8A;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        #shorten-form {
+            display: flex;
+            gap: 10px;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        #shorten-form input {
+            flex: 1;
+            padding: 12px 14px;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        #shorten-form button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            background: #16A34A;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        #shorten-form button:hover {
+            background: #15803D;
+        }
+
+        #shorten-form button .hand-icon {
+            font-size: 18px;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-head h2 {
+            color: #1F2937;
+            margin: 0;
+        }
+
+        .count-pill {
+            background: #ffffff;
+            color: #374151;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .link-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .url-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .short-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .short-url {
+            color: #0284C7;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.05rem;
+        }
+
+        .short-url:hover {
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            background: #EEF2FF;
+            border: 1px solid #C7D2FE;
+            color: #4338CA;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .copy-btn:hover {
+            background: #E0E7FF;
+        }
+
+        .original-url {
+            color: #374151;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin: 0 0 12px;
+            line-height: 1.5;
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            border-top: 1px solid #F0F0EE;
+            padding-top: 10px;
+        }
+
+        .meta-item {
+            color: #6B7280;
+        }
+
+        .analytics-link {
+            color: #1E3A8A;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .analytics-link:hover {
+            text-decoration: underline;
+        }
+
+        .click-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #DCFCE7;
+            border: 1px solid #86EFAC;
+            border-radius: 20px;
+            padding: 4px 12px;
+        }
+
+        .click-badge.zero {
+            background: #F3F4F6;
+            border-color: #E5E7EB;
+        }
+
+        .click-count {
+            font-weight: 800;
+            color: #15803D;
+            font-size: 0.95rem;
+        }
+
+        .click-badge.zero .click-count {
+            color: #9CA3AF;
+        }
+
+        .click-label {
+            font-size: 0.75rem;
+            color: #15803D;
+        }
+
+        .click-badge.zero .click-label {
+            color: #9CA3AF;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            color: #6B7280;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #16A34A;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .toast.show { opacity: 1; }
+        .toast.error { background: #DC2626; }
+
+        @media (max-width: 560px) {
+            #shorten-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="hero">
+            <h1>🔗 LinkForge</h1>
+            <p class="tagline">Turn long links into short ones. Watch every click land, in real time.</p>
+            <span class="sub-heading">Built with FastAPI · SQLAlchemy · REST API</span>
+        </header>
+
+        <section class="shorten-panel">
+            <form id="shorten-form">
+                <input type="url" id="original-url" placeholder="Paste your long URL here (https://...)" required autocomplete="off">
+                <button type="submit">
+                    <span>Shorten</span>
+                    <span class="hand-icon">👉</span>
+                </button>
+            </form>
+        </section>
+
+        <section class="links-section">
+            <div class="section-head">
+                <h2>Your links</h2>
+                <span class="count-pill">{{ urls|length }} total</span>
+            </div>
+
+            {% if urls %}
+            <div class="link-list">
+                {% for url in urls %}
+                <article class="link-card">
+                    <div>
+                        <span class="url-label">Short URL</span>
+                        <div class="short-row">
+                            <a href="{{ url.short_url }}" target="_blank" class="short-url">{{ url.short_url }}</a>
+                            <button class="copy-btn" data-url="{{ url.short_url }}" title="Copy link">📋</button>
+                        </div>
+                        <span class="url-label">Original URL</span>
+                        <p class="original-url">{{ url.original_url }}</p>
+                        <div class="meta-row">
+                            <span class="meta-item">{{ url.created_at }} &nbsp;·&nbsp; <a href="/api/analytics/{{ url.short_code }}" target="_blank" class="analytics-link">View analytics →</a></span>
+                            <span class="click-badge {% if url.click_count == 0 %}zero{% endif %}">
+                                <span class="click-count">{{ url.click_count }}</span>
+                                <span class="click-label">{{ "click" if url.click_count == 1 else "clicks" }}</span>
+                            </span>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <p>No links yet — paste one above to create your first short link. 👆</p>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
