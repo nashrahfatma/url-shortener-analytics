@@ -1,4 +1,7 @@
-URL Shortener with Analytics Dashboard
+**URL Shortener with Analytics Dashboard**
+
+🔗 **Live Demo:** (https://url-shortener-analytics-gxs3.onrender.com)
+
 A backend service that shortens long URLs and tracks click analytics for each link — built with FastAPI, SQLAlchemy, and SQLite.
 
 Live demo of what it does:
