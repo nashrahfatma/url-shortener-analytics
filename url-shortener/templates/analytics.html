@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics | {{ short_code }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to dashboard</a>
+
+        <h1>📊 Link Analytics</h1>
+        <p class="subtitle">Detailed click history for <strong>/{{ short_code }}</strong></p>
+
+        <div class="analytics-meta">
+            <div class="meta-row">
+                <span class="meta-label">Short URL</span>
+                <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+            </div>
+            <div class="meta-row">
+                <span class="meta-label">Original URL</span>
+                <span class="original-url" title="{{ original_url }}">{{ original_url }}</span>
+            </div>
+            <div class="meta-row">
+                <span class="meta-label">Created</span>
+                <span>{{ created_at }}</span>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-value">{{ total_clicks }}</span>
+                <span class="stat-label">Total Clicks</span>
+            </div>
+        </div>
+
+        <h2>Click History</h2>
+
+        {% if clicks %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Clicked At</th>
+                    <th>Device / User Agent</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for click in clicks %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ click.clicked_at }}</td>
+                    <td class="original-url" title="{{ click.user_agent }}">{{ click.user_agent }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <p>👀 No clicks yet.</p>
+            <p class="empty-sub">Share the short link to start tracking visits.</p>
+        </div>
+        {% endif %}
+
+        <p class="api-note">
+            Prefer raw data? The machine-readable version of this page is available at
+            <a href="/api/analytics/{{ short_code }}" target="_blank">/api/analytics/{{ short_code }}</a>.
+        </p>
+    </div>
+</body>
+</html>
